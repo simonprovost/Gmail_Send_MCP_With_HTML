@@ -38,6 +38,9 @@ publish/
 appsettings.Local.json
 appsettings.*.Local.json
 
+# MCP config (contains credentials)
+.mcp.json
+
 # OS
 .DS_Store
 Thumbs.db
