@@ -1,22 +1,20 @@
 using MailKit.Net.Smtp;
 using MailKit.Security;
+using Microsoft.Extensions.Logging;
 using MimeKit;
 
 namespace GmailMcp;
 
-public interface IEmailService
-{
-    Task SendAsync(string to, string subject, string body,
-                   string? cc = null, string? bcc = null, bool isHtml = false,
-                   CancellationToken cancellationToken = default);
-}
-
 public sealed class EmailService : IEmailService
 {
+    private const string SmtpHost = "smtp.gmail.com";
+    private const int SmtpPort = 587;
+
     private readonly string _gmailAddress;
     private readonly string _appPassword;
+    private readonly ILogger<EmailService>? _logger;
 
-    public EmailService(string gmailAddress, string appPassword)
+    public EmailService(string gmailAddress, string appPassword, ILogger<EmailService>? logger = null)
     {
         if (string.IsNullOrWhiteSpace(gmailAddress))
             throw new ArgumentException("Gmail address must not be null or empty.", nameof(gmailAddress));
@@ -25,6 +23,7 @@ public sealed class EmailService : IEmailService
 
         _gmailAddress = gmailAddress;
         _appPassword = appPassword;
+        _logger = logger;
     }
 
     public MimeMessage BuildMessage(string to, string subject, string body,
@@ -49,14 +48,17 @@ public sealed class EmailService : IEmailService
                                 string? cc = null, string? bcc = null, bool isHtml = false,
                                 CancellationToken cancellationToken = default)
     {
+        _logger?.LogInformation("Sending email to {To}", to);
+
         var message = BuildMessage(to, subject, body, cc, bcc, isHtml);
 
         using var client = new SmtpClient();
         try
         {
-            await client.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls, cancellationToken);
+            await client.ConnectAsync(SmtpHost, SmtpPort, SecureSocketOptions.StartTls, cancellationToken);
             await client.AuthenticateAsync(_gmailAddress, _appPassword, cancellationToken);
             await client.SendAsync(message, cancellationToken);
+            _logger?.LogInformation("Email sent successfully to {To}", to);
         }
         finally
         {

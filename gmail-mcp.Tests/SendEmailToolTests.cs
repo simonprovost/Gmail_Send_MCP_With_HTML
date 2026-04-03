@@ -1,4 +1,7 @@
+using System.Net.Sockets;
 using GmailMcp;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 using Moq;
 using Xunit;
 
@@ -61,5 +64,75 @@ public class SendEmailToolTests
 
         Assert.StartsWith("Error sending email:", result);
         Assert.Contains("Auth failed", result);
+    }
+
+    // Test 4: OperationCanceledException returns cancellation message
+    [Fact]
+    public async Task SendEmail_OperationCanceledException_ReturnsCancelledMessage()
+    {
+        var mock = new Mock<IEmailService>();
+        mock.Setup(s => s.SendAsync(
+                It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
+                It.IsAny<string?>(), It.IsAny<string?>(), It.IsAny<bool>(),
+                It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new OperationCanceledException());
+
+        var result = await SendEmailTool.SendEmail(
+            mock.Object, "to@example.com", "Subject", "Body");
+
+        Assert.Equal("Email sending was cancelled.", result);
+    }
+
+    // Test 5: AuthenticationException returns auth error with credential hint
+    [Fact]
+    public async Task SendEmail_AuthenticationException_ReturnsAuthError()
+    {
+        var mock = new Mock<IEmailService>();
+        mock.Setup(s => s.SendAsync(
+                It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
+                It.IsAny<string?>(), It.IsAny<string?>(), It.IsAny<bool>(),
+                It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new AuthenticationException("535 Bad credentials"));
+
+        var result = await SendEmailTool.SendEmail(
+            mock.Object, "to@example.com", "Subject", "Body");
+
+        Assert.StartsWith("Authentication error:", result);
+        Assert.Contains("GMAIL_APP_PASSWORD", result);
+    }
+
+    // Test 6: SmtpCommandException returns SMTP error with status code
+    [Fact]
+    public async Task SendEmail_SmtpCommandException_ReturnsSmtpError()
+    {
+        var mock = new Mock<IEmailService>();
+        mock.Setup(s => s.SendAsync(
+                It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
+                It.IsAny<string?>(), It.IsAny<string?>(), It.IsAny<bool>(),
+                It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new SmtpCommandException(SmtpErrorCode.MessageNotAccepted, SmtpStatusCode.MailboxBusy, "Mailbox busy"));
+
+        var result = await SendEmailTool.SendEmail(
+            mock.Object, "to@example.com", "Subject", "Body");
+
+        Assert.StartsWith("SMTP error", result);
+    }
+
+    // Test 7: SocketException returns connection error with network hint
+    [Fact]
+    public async Task SendEmail_SocketException_ReturnsConnectionError()
+    {
+        var mock = new Mock<IEmailService>();
+        mock.Setup(s => s.SendAsync(
+                It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
+                It.IsAny<string?>(), It.IsAny<string?>(), It.IsAny<bool>(),
+                It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new SocketException(11001));
+
+        var result = await SendEmailTool.SendEmail(
+            mock.Object, "to@example.com", "Subject", "Body");
+
+        Assert.StartsWith("Connection error:", result);
+        Assert.Contains("network connectivity", result);
     }
 }

@@ -1,4 +1,7 @@
 using System.ComponentModel;
+using System.Net.Sockets;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 using ModelContextProtocol.Server;
 
 namespace GmailMcp;
@@ -29,6 +32,22 @@ public static class SendEmailTool
         {
             await emailService.SendAsync(to, subject, body, cc, bcc, is_html, cancellationToken);
             return $"Email sent successfully to {to}.";
+        }
+        catch (OperationCanceledException)
+        {
+            return "Email sending was cancelled.";
+        }
+        catch (AuthenticationException ex)
+        {
+            return $"Authentication error: {ex.Message}. Check your GMAIL_APP_PASSWORD.";
+        }
+        catch (SmtpCommandException ex)
+        {
+            return $"SMTP error ({ex.StatusCode}): {ex.Message}";
+        }
+        catch (SocketException ex)
+        {
+            return $"Connection error: {ex.Message}. Check network connectivity.";
         }
         catch (Exception ex)
         {

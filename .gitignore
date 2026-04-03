@@ -1,3 +1,6 @@
+# Architecture analysis reports
+.Analysis/
+
 # Build outputs
 bin/
 obj/
