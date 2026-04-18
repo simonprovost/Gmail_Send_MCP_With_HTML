@@ -48,7 +48,7 @@ Agentic Automation Sending Me NY-TIMES/WIRED designed newsletter on the morning 
 Cheers!
 ## <a id="installation"></a><img src="docs/assets/icons/lucide/download.svg" width="32" alt="" /> Installation
 
-### Pick & Install
+### <img src="docs/assets/icons/lucide/roman-i.svg" width="22" alt="" align="absmiddle" /> Pick & Install
 
 - <details>
   <summary><strong>macOS — Apple Silicon</strong></summary>
@@ -121,7 +121,7 @@ Cheers!
 
   </details>
 
-Then [grab a Gmail App Password](#3-get-a-gmail-app-password) and [register the server](#register-with-an-mcp-client) with your client.
+Then [grab a Gmail App Password](#get-a-gmail-app-password) and [register the server](#register-with-an-mcp-client) with your client.
 
 <details>
 <summary><a id="manual-install"></a><strong>If you'd prefer a step-by-step walkthrough, click here.</strong></summary>
@@ -180,7 +180,7 @@ Expand-Archive gmail-mcp-win-x64.zip -DestinationPath $HOME\bin
 
 </details>
 
-### 3. Get a Gmail App Password
+### <img src="docs/assets/icons/lucide/roman-ii.svg" width="22" alt="" align="absmiddle" /> Get a Gmail App Password
 
 A Google App Password is a 16-character credential that lets a non-Google application sign in on your behalf, **without** sharing your real account password.
 
