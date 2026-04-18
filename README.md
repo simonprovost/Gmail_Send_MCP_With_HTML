@@ -211,13 +211,6 @@ A Google App Password is a 16-character credential that lets a non-Google applic
 
 ## <a id="register-with-an-mcp-client"></a><img src="docs/assets/icons/lucide/file-cog.svg" width="32" alt="" /> Register With an MCP Client
 
-The server reads two environment variables and exits immediately if either is missing:
-
-| Variable             | Example                |
-|----------------------|------------------------|
-| `GMAIL_ADDRESS`      | `you@gmail.com`        |
-| `GMAIL_APP_PASSWORD` | `abcd efgh ijkl mnop`  |
-
 <details>
 <summary><strong>Codex CLI</strong></summary>
 
