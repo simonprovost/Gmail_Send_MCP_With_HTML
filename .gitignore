@@ -51,3 +51,7 @@ desktop.ini
 
 # Local publish output
 dist/
+
+# Claude Code / agent scaffolding
+.claude/
+CLAUDE.md
