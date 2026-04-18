@@ -51,11 +51,36 @@ Cheers!
 > [!TIP]
 > Pre-built binaries require **no .NET SDK** on your machine. Each release ships self-contained single-file executables for macOS (Apple Silicon & Intel), Linux (x64 & arm64), and Windows (x64). About 35–45 MB each.
 
-### 1. Download
+### Quick install (macOS / Linux)
+
+Pick your platform asset (`osx-arm64`, `osx-x64`, `linux-x64`, `linux-arm64`) and run:
+
+```bash
+curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-osx-arm64.tar.gz \
+  | tar -xz -C ~/.local/bin && chmod +x ~/.local/bin/gmail-mcp
+```
+
+macOS only — clear gatekeeper once: `xattr -d com.apple.quarantine ~/.local/bin/gmail-mcp`.
+
+### Quick install (Windows, PowerShell)
+
+```powershell
+Invoke-WebRequest https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-win-x64.zip -OutFile $env:TEMP\gmail-mcp.zip
+Expand-Archive $env:TEMP\gmail-mcp.zip -DestinationPath $HOME\bin -Force
+```
+
+Then [grab a Gmail App Password](#3-get-a-gmail-app-password) and [register the server](#register-with-an-mcp-client) with your client.
+
+<details>
+<summary><strong>Step-by-step install (manual download, version pinning, all platforms)</strong></summary>
+
+<br>
+
+#### 1. Download
 
 Pick whichever workflow you prefer.
 
-#### Option A — Manual download
+##### Option A — Manual download
 
 Grab the archive for your platform from the [latest release](https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest):
 
@@ -69,12 +94,7 @@ Grab the archive for your platform from the [latest release](https://github.com/
 
 Verify the download against `SHA256SUMS.txt` from the same release.
 
-#### Option B — One-liner (`curl`)
-
-<details>
-<summary>Pull a release archive directly from the command line.</summary>
-
-<br>
+##### Option B — One-liner (`curl`)
 
 ```bash
 # macOS — Apple Silicon (replace the asset name for your platform)
@@ -82,19 +102,14 @@ curl -L -o gmail-mcp.tar.gz \
   https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-osx-arm64.tar.gz
 ```
 
-Or pin a specific version (recommended for reproducible installs — replace `vX.Y.Z`):
+Or pin a specific version (recommended for reproducible installs — replace `vX.Y.Z`, e.g. `v0.1.0`):
 
 ```bash
 curl -L -o gmail-mcp.tar.gz \
   https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/download/vX.Y.Z/gmail-mcp-osx-arm64.tar.gz
 ```
 
-> [!NOTE]
-> The `latest` URL always resolves to the most recent published release; replace `vX.Y.Z` with the actual tag (e.g. `v0.1.0`) once releases are cut.
-
-</details>
-
-### 2. Install
+#### 2. Install
 
 ```bash
 # macOS / Linux
@@ -110,6 +125,8 @@ xattr -d com.apple.quarantine ~/.local/bin/gmail-mcp 2>/dev/null || true
 # Windows
 Expand-Archive gmail-mcp-win-x64.zip -DestinationPath $HOME\bin
 ```
+
+</details>
 
 ### 3. Get a Gmail App Password
 
