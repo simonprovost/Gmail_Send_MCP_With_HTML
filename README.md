@@ -46,7 +46,7 @@ The server treats HTML bodies as first-class: pass an HTML document and it is de
 Agentic Automation Sending Me NY-TIMES/WIRED designed newsletter on the morning without having to sub. to any of these news; I make my coffee, I read. As easy as that.
 
 Cheers!
-## <a id="installation"></a><img src="docs/assets/icons/lucide/download.svg" width="32" alt="" /> Installation
+## <a id="installation"></a><img src="docs/assets/icons/lucide/rocket.svg" width="32" alt="" /> Getting Started
 
 ### <img src="docs/assets/icons/lucide/roman-i.svg" width="22" alt="" align="absmiddle" /> Pick & Install
 
@@ -192,7 +192,7 @@ A Google App Password is a 16-character credential that lets a non-Google applic
 > [!WARNING]
 > Treat the App Password like the account password itself. Anyone holding it can send mail as you until you revoke it from the same page.
 
-## <a id="register-with-an-mcp-client"></a><img src="docs/assets/icons/lucide/file-cog.svg" width="32" alt="" /> Register With an MCP Client
+### <a id="register-with-an-mcp-client"></a><img src="docs/assets/icons/lucide/roman-iii.svg" width="22" alt="" align="absmiddle" /> Register With an MCP Client
 
 <details>
 <summary><strong>Codex CLI</strong></summary>
