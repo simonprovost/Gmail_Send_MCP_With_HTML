@@ -2,7 +2,8 @@
 <div align="center">
    <h1 align="center">Gmail Send MCP</h1>
    <h4 align="center">
-      A minimal Model Context Protocol server for sending email via Gmail SMTP —
+      A minimal Model Context Protocol server for sending email via Gmail SMTP
+      <br>
       <a href="https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest">Download</a> ·
       <a href="#installation">Install</a> ·
       <a href="#tool-reference">Tool reference</a>
