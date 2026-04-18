@@ -301,20 +301,30 @@ Email bob@example.com and cc carol@example.com to confirm the deploy succeeded.
 
 ## <a id="capabilities-and-limits"></a><img src="docs/assets/icons/lucide/circle-check-big.svg" width="32" alt="" /> Capabilities & Limits
 
-**What it does**
+<details>
+<summary><strong>What it does</strong></summary>
+
+<br>
 
 - Plain-text or HTML email through Gmail SMTP (`smtp.gmail.com:587`, STARTTLS).
 - Multiple recipients on `To`, `Cc`, and `Bcc`.
 - Auto-detects HTML and emits a properly structured `multipart/alternative` message — no client-side fallback rendering surprises.
 - Reads credentials from environment variables only; nothing is persisted on disk.
 
-**What it deliberately doesn't do**
+</details>
+
+<details>
+<summary><strong>What it deliberately doesn't do</strong></summary>
+
+<br>
 
 - **Gmail only.** SMTP host and port are hardcoded. Other providers are out of scope.
 - **App Password required.** No OAuth2.
 - **No attachments.**
 - **No delivery receipts.** The tool returns a success/failure string after `SEND` accepts the message; it does not poll for bounces.
 - **Gmail's own limits apply.** Free accounts cap at ~500 recipients per rolling 24 hours.
+
+</details>
 
 ## <a id="build-from-source"></a><img src="docs/assets/icons/lucide/wrench.svg" width="32" alt="" /> Build From Source
 
