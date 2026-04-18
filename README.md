@@ -51,28 +51,97 @@ Cheers!
 > [!TIP]
 > Pre-built binaries require **no .NET SDK** on your machine. Each release ships self-contained single-file executables for macOS (Apple Silicon & Intel), Linux (x64 & arm64), and Windows (x64). About 35–45 MB each.
 
-### Quick install (macOS / Linux)
+### Pick & Install
 
-Pick your platform asset (`osx-arm64`, `osx-x64`, `linux-x64`, `linux-arm64`) and run:
+Open the panel for your platform, copy the one-liner.
+
+<details>
+<summary><strong>macOS — Apple Silicon (M1/M2/M3/M4)</strong></summary>
+
+<br>
 
 ```bash
-curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-osx-arm64.tar.gz \
-  | tar -xz -C ~/.local/bin && chmod +x ~/.local/bin/gmail-mcp
+mkdir -p ~/.local/bin && \
+  curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-osx-arm64.tar.gz \
+  | tar -xz -C ~/.local/bin && \
+  chmod +x ~/.local/bin/gmail-mcp && \
+  xattr -d com.apple.quarantine ~/.local/bin/gmail-mcp 2>/dev/null || true
 ```
 
-macOS only — clear gatekeeper once: `xattr -d com.apple.quarantine ~/.local/bin/gmail-mcp`.
+<a href="#step-by-step-install"><img src="docs/assets/icons/lucide/arrow-right.svg" width="14" alt="" align="absmiddle" /> If you'd prefer a step-by-step walkthrough, click here.</a>
 
-### Quick install (Windows, PowerShell)
+</details>
+
+<details>
+<summary><strong>macOS — Intel</strong></summary>
+
+<br>
+
+```bash
+mkdir -p ~/.local/bin && \
+  curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-osx-x64.tar.gz \
+  | tar -xz -C ~/.local/bin && \
+  chmod +x ~/.local/bin/gmail-mcp && \
+  xattr -d com.apple.quarantine ~/.local/bin/gmail-mcp 2>/dev/null || true
+```
+
+<a href="#step-by-step-install"><img src="docs/assets/icons/lucide/arrow-right.svg" width="14" alt="" align="absmiddle" /> If you'd prefer a step-by-step walkthrough, click here.</a>
+
+</details>
+
+<details>
+<summary><strong>Linux — x64</strong></summary>
+
+<br>
+
+```bash
+mkdir -p ~/.local/bin && \
+  curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-linux-x64.tar.gz \
+  | tar -xz -C ~/.local/bin && \
+  chmod +x ~/.local/bin/gmail-mcp
+```
+
+<a href="#step-by-step-install"><img src="docs/assets/icons/lucide/arrow-right.svg" width="14" alt="" align="absmiddle" /> If you'd prefer a step-by-step walkthrough, click here.</a>
+
+</details>
+
+<details>
+<summary><strong>Linux — arm64</strong></summary>
+
+<br>
+
+```bash
+mkdir -p ~/.local/bin && \
+  curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-linux-arm64.tar.gz \
+  | tar -xz -C ~/.local/bin && \
+  chmod +x ~/.local/bin/gmail-mcp
+```
+
+<a href="#step-by-step-install"><img src="docs/assets/icons/lucide/arrow-right.svg" width="14" alt="" align="absmiddle" /> If you'd prefer a step-by-step walkthrough, click here.</a>
+
+</details>
+
+<details>
+<summary><strong>Windows — x64 (PowerShell)</strong></summary>
+
+<br>
 
 ```powershell
+$dest = "$HOME\bin"; New-Item -ItemType Directory -Force -Path $dest | Out-Null
 Invoke-WebRequest https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-win-x64.zip -OutFile $env:TEMP\gmail-mcp.zip
-Expand-Archive $env:TEMP\gmail-mcp.zip -DestinationPath $HOME\bin -Force
+Expand-Archive $env:TEMP\gmail-mcp.zip -DestinationPath $dest -Force
 ```
+
+<a href="#step-by-step-install"><img src="docs/assets/icons/lucide/arrow-right.svg" width="14" alt="" align="absmiddle" /> If you'd prefer a step-by-step walkthrough, click here.</a>
+
+</details>
 
 Then [grab a Gmail App Password](#3-get-a-gmail-app-password) and [register the server](#register-with-an-mcp-client) with your client.
 
+### <a id="step-by-step-install"></a>Step-by-step install
+
 <details>
-<summary><strong>Step-by-step install (manual download, version pinning, all platforms)</strong></summary>
+<summary><strong>Manual download, version pinning, and per-step extraction</strong></summary>
 
 <br>
 
