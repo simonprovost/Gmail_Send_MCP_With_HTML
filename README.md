@@ -48,9 +48,6 @@ Agentic Automation Sending Me NY-TIMES/WIRED designed newsletter on the morning 
 Cheers!
 ## <a id="installation"></a><img src="docs/assets/icons/lucide/download.svg" width="32" alt="" /> Installation
 
-> [!TIP]
-> Pre-built binaries require **no .NET SDK** on your machine. Each release ships self-contained single-file executables for macOS (Apple Silicon & Intel), Linux (x64 & arm64), and Windows (x64). About 35–45 MB each.
-
 ### Pick & Install
 
 Open the panel for your platform, copy the one-liner.
