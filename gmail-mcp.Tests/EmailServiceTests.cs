@@ -54,7 +54,19 @@ public class EmailServiceTests
         var svc = new EmailService("sender@gmail.com", "secret");
         var msg = svc.BuildMessage("a@x.com", "Sub", "<b>Bold</b>", null, null, true);
 
-        var body = Assert.IsType<TextPart>(msg.Body);
-        Assert.Equal("html", body.ContentType.MediaSubtype);
+        Assert.NotNull(msg.HtmlBody);
+        Assert.Contains("<b>Bold</b>", msg.HtmlBody);
+    }
+
+    // Test 5: BuildMessage auto-detects HTML body even when isHtml=false
+    [Fact]
+    public void BuildMessage_HtmlBodyDetected_SendsAsHtml()
+    {
+        var svc = new EmailService("sender@gmail.com", "secret");
+        var msg = svc.BuildMessage("a@x.com", "Sub",
+            "<!DOCTYPE html><html><body><p>Hi</p></body></html>", null, null, false);
+
+        Assert.NotNull(msg.HtmlBody);
+        Assert.Contains("<p>Hi</p>", msg.HtmlBody);
     }
 }

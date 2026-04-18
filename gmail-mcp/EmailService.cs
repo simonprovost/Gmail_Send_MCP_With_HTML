@@ -39,9 +39,47 @@ public sealed class EmailService : IEmailService
             AddAddresses(message.Bcc, bcc);
 
         message.Subject = subject;
-        message.Body = new TextPart(isHtml ? "html" : "plain") { Text = body };
+
+        var treatAsHtml = isHtml || LooksLikeHtml(body);
+        if (treatAsHtml)
+        {
+            var builder = new BodyBuilder
+            {
+                HtmlBody = body,
+                TextBody = HtmlToPlainText(body),
+            };
+            message.Body = builder.ToMessageBody();
+        }
+        else
+        {
+            message.Body = new TextPart("plain") { Text = body };
+        }
 
         return message;
+    }
+
+    private static bool LooksLikeHtml(string body)
+    {
+        if (string.IsNullOrWhiteSpace(body)) return false;
+        var trimmed = body.AsSpan().TrimStart();
+        if (trimmed.Length == 0) return false;
+        if (trimmed[0] != '<') return false;
+        return trimmed.IndexOf('>') > 0 &&
+               (body.Contains("</", StringComparison.OrdinalIgnoreCase)
+                || body.Contains("<!doctype", StringComparison.OrdinalIgnoreCase)
+                || body.Contains("<html", StringComparison.OrdinalIgnoreCase)
+                || body.Contains("<body", StringComparison.OrdinalIgnoreCase)
+                || body.Contains("<table", StringComparison.OrdinalIgnoreCase)
+                || body.Contains("<div", StringComparison.OrdinalIgnoreCase)
+                || body.Contains("<p", StringComparison.OrdinalIgnoreCase)
+                || body.Contains("<br", StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static string HtmlToPlainText(string html)
+    {
+        var noTags = System.Text.RegularExpressions.Regex.Replace(html, "<[^>]+>", " ");
+        var decoded = System.Net.WebUtility.HtmlDecode(noTags);
+        return System.Text.RegularExpressions.Regex.Replace(decoded, @"\s+", " ").Trim();
     }
 
     public async Task SendAsync(string to, string subject, string body,
