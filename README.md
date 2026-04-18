@@ -50,103 +50,81 @@ Cheers!
 
 ### Pick & Install
 
-<table>
-<tr>
-<td>
+- <details>
+  <summary><strong>macOS — Apple Silicon</strong></summary>
 
-<details>
-<summary><strong>macOS — Apple Silicon</strong></summary>
+  <br>
 
-<br>
+  ```bash
+  mkdir -p ~/.local/bin && \
+    curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-osx-arm64.tar.gz \
+    | tar -xz -C ~/.local/bin && \
+    chmod +x ~/.local/bin/gmail-mcp && \
+    xattr -d com.apple.quarantine ~/.local/bin/gmail-mcp 2>/dev/null || true
+  ```
 
-```bash
-mkdir -p ~/.local/bin && \
-  curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-osx-arm64.tar.gz \
-  | tar -xz -C ~/.local/bin && \
-  chmod +x ~/.local/bin/gmail-mcp && \
-  xattr -d com.apple.quarantine ~/.local/bin/gmail-mcp 2>/dev/null || true
-```
+  </details>
 
-</details>
+- <details>
+  <summary><strong>macOS — Intel</strong></summary>
 
-</td>
-<td>
+  <br>
 
-<details>
-<summary><strong>macOS — Intel</strong></summary>
+  ```bash
+  mkdir -p ~/.local/bin && \
+    curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-osx-x64.tar.gz \
+    | tar -xz -C ~/.local/bin && \
+    chmod +x ~/.local/bin/gmail-mcp && \
+    xattr -d com.apple.quarantine ~/.local/bin/gmail-mcp 2>/dev/null || true
+  ```
 
-<br>
+  </details>
 
-```bash
-mkdir -p ~/.local/bin && \
-  curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-osx-x64.tar.gz \
-  | tar -xz -C ~/.local/bin && \
-  chmod +x ~/.local/bin/gmail-mcp && \
-  xattr -d com.apple.quarantine ~/.local/bin/gmail-mcp 2>/dev/null || true
-```
+- <details>
+  <summary><strong>Linux — x64</strong></summary>
 
-</details>
+  <br>
 
-</td>
-<td>
+  ```bash
+  mkdir -p ~/.local/bin && \
+    curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-linux-x64.tar.gz \
+    | tar -xz -C ~/.local/bin && \
+    chmod +x ~/.local/bin/gmail-mcp
+  ```
 
-<details>
-<summary><strong>Linux — x64</strong></summary>
+  </details>
 
-<br>
+- <details>
+  <summary><strong>Linux — arm64</strong></summary>
 
-```bash
-mkdir -p ~/.local/bin && \
-  curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-linux-x64.tar.gz \
-  | tar -xz -C ~/.local/bin && \
-  chmod +x ~/.local/bin/gmail-mcp
-```
+  <br>
 
-</details>
+  ```bash
+  mkdir -p ~/.local/bin && \
+    curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-linux-arm64.tar.gz \
+    | tar -xz -C ~/.local/bin && \
+    chmod +x ~/.local/bin/gmail-mcp
+  ```
 
-</td>
-<td>
+  </details>
 
-<details>
-<summary><strong>Linux — arm64</strong></summary>
+- <details>
+  <summary><strong>Windows — x64</strong></summary>
 
-<br>
+  <br>
 
-```bash
-mkdir -p ~/.local/bin && \
-  curl -L https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-linux-arm64.tar.gz \
-  | tar -xz -C ~/.local/bin && \
-  chmod +x ~/.local/bin/gmail-mcp
-```
+  ```powershell
+  $dest = "$HOME\bin"; New-Item -ItemType Directory -Force -Path $dest | Out-Null
+  Invoke-WebRequest https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-win-x64.zip -OutFile $env:TEMP\gmail-mcp.zip
+  Expand-Archive $env:TEMP\gmail-mcp.zip -DestinationPath $dest -Force
+  ```
 
-</details>
-
-</td>
-<td>
-
-<details>
-<summary><strong>Windows — x64</strong></summary>
-
-<br>
-
-```powershell
-$dest = "$HOME\bin"; New-Item -ItemType Directory -Force -Path $dest | Out-Null
-Invoke-WebRequest https://github.com/simonprovost/Gmail_Send_MCP_With_HTML/releases/latest/download/gmail-mcp-win-x64.zip -OutFile $env:TEMP\gmail-mcp.zip
-Expand-Archive $env:TEMP\gmail-mcp.zip -DestinationPath $dest -Force
-```
-
-</details>
-
-</td>
-</tr>
-</table>
+  </details>
 
 Then [grab a Gmail App Password](#3-get-a-gmail-app-password) and [register the server](#register-with-an-mcp-client) with your client.
 
-<a href="#manual-install"><img src="docs/assets/icons/lucide/arrow-right.svg" width="14" alt="" align="absmiddle" /> If you'd prefer a step-by-step walkthrough, click here.</a>
-
 <details>
-<summary><a id="manual-install"></a><strong>Manual download, version pinning, and per-step extraction</strong></summary>
+<summary><a id="manual-install"></a><strong>If you'd prefer a step-by-step walkthrough, click here.</strong></summary>
 
 <br>
 
