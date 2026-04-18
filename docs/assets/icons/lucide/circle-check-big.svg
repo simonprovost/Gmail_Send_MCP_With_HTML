@@ -1,0 +1,14 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="url(#readme-gradient)"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+><defs><linearGradient id="readme-gradient" x1="12" y1="0" x2="12" y2="24" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FD706B"/><stop offset="1" stop-color="#472727"/></linearGradient></defs>
+  <path d="M21.801 10A10 10 0 1 1 17 3.335" />
+  <path d="m9 11 3 3L22 4" />
+</svg>
